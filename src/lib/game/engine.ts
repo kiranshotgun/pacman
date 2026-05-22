@@ -126,21 +126,18 @@ export function stepGame(state: GameState): GameState {
     const player = players[playerId];
     if (!player.alive) continue;
 
-    let direction = player.direction;
-
-    const desired = getNextPosition(player.x, player.y, player.nextDirection);
-    if (!isWall(desired.x, desired.y)) {
-      direction = player.nextDirection;
-    }
-
-    const next = getNextPosition(player.x, player.y, direction);
-
     let x = player.x;
     let y = player.y;
+    let direction = player.direction;
 
-    if (!isWall(next.x, next.y)) {
-      x = next.x;
-      y = next.y;
+    if (player.nextDirection !== "none") {
+      const next = getNextPosition(player.x, player.y, player.nextDirection);
+
+      if (!isWall(next.x, next.y)) {
+        x = next.x;
+        y = next.y;
+        direction = player.nextDirection;
+      }
     }
 
     const pelletKey = `${x},${y}`;
@@ -155,6 +152,7 @@ export function stepGame(state: GameState): GameState {
       x,
       y,
       direction,
+      nextDirection: "none",
       score: player.score + (atePellet ? 10 : 0),
     };
   }

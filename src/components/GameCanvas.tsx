@@ -230,7 +230,7 @@ export default function GameCanvas({ roomId, name }: Props) {
     function handleKeyDown(event: KeyboardEvent) {
       const direction = keyToDirection[event.key];
 
-      if (!direction || !channelRef.current) return;
+      if (!direction || !channelRef.current || event.repeat) return;
 
       event.preventDefault();
 

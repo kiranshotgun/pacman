@@ -1,6 +1,6 @@
 export const TILE_SIZE = 24;
 
-export const TICK_RATE = 12;
+export const TICK_RATE = 8;
 
 export const PLAYER_COLORS = [
   "#facc15",
