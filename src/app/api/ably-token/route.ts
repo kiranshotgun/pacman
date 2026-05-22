@@ -8,6 +8,10 @@ export async function GET(req: NextRequest) {
   const apiKey = process.env.ABLY_API_KEY?.trim();
 
   if (!apiKey) {
+    console.error(
+      "ABLY_API_KEY is not configured for this deployment environment.",
+    );
+
     return NextResponse.json(
       {
         error:
